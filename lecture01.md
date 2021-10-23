@@ -2,11 +2,11 @@
 
 a typical Computer hardware consist of three main components, ```cpu```, ```Memory```, ```IO``` and ```peripherals```. as well as Microcontrollers which we will focus on
 
-* why need peripherals at the first place?
-    * each peripheral can be programmed and run in Parallel manner with cpu and other peripherals, because at the end, a peripheral is nothing other than **hardware circuit** outside the cpu and separated from other peripherals Functionalities.
-    * fewer Code to store in the Flash Memory (i.e. **Memory conservation**).
-    * Faster than Code. bacause a peripheral is a **programmable dedicated hardware** for specific functionalities and this is always faster than doing this Functionalities using general purpose Cpu.
-     * even if we use real time operating system to handle perihperals functionalities with code in separate threads, it's still **sequential execution** of the code not in parallel manner. **C language cannot run actual parallel threads**
+### why need peripherals at the first place?
+* each peripheral can be programmed and run in Parallel manner with cpu and other peripherals, because at the end, a peripheral is nothing other than **hardware circuit** outside the cpu and separated from other peripherals Functionalities.
+* fewer Code to store in the Flash Memory (i.e. **Memory conservation**).
+* Faster than Code. bacause a peripheral is a **programmable dedicated hardware** for specific functionalities and this is always faster than doing this Functionalities using general purpose Cpu.
+* even if we use real time operating system to handle perihperals functionalities with code in separate threads, it's still **sequential execution** of the code not in parallel manner. **C language cannot run actual parallel threads**
 
 for example, suppose I want to send 8 bits data output from Mcu Pin serially to another Mcu
 * with code
@@ -31,15 +31,15 @@ UART.DR = data;     /* this will be sent by UART automatically */
 /* rest of your code */
 ```
 
-* why need Memory?
-    * store the code in **FLASH** Memory or soCalled **ROM**
-    * store program data for execution in **RAM** Memory, this is temporary data that can be replaced by any value
+### why need Memory? 
+* store the code in **FLASH** Memory or soCalled **ROM**
+* store program data for execution in **RAM** Memory, this is temporary data that can be replaced by any value
 
-* how the CPU controls the **RAM**/**ROM** and **IO** or **peripherals** in general?
-    * CPU deals with Memory, and all of these have controllable registers that is mapped to certain addresses in the RAM, so processor can deal with them using the RAM interfacing with it becuase the user can W/R this type of registers, it's called **User-visible-registers** 
-    * there's some registers does not have any mapped addresses in the RAM so it cannot be controlled using RAM interface with CPU, usually these registers are reserved for controlling the operation of the processor, OS program access and privileged access only, but there're assembly instructions user can use to deal with em' directly. these registers are called **Control and status registers**
+how the CPU controls the **RAM**/**ROM** and **IO** or **peripherals** in general?
+* CPU deals with Memory, and all of these have controllable registers that is mapped to certain addresses in the RAM, so processor can deal with them using the RAM interfacing with it becuase the user can W/R this type of registers, it's called **User-visible-registers** 
+* there's some registers does not have any mapped addresses in the RAM so it cannot be controlled using RAM interface with CPU, usually these registers are reserved for controlling the operation of the processor, OS program access and privileged access only, but there're assembly instructions user can use to deal with em' directly. these registers are called **Control and status registers**
 
-how does the cpu inteface the Memory?
+### how does the cpu inteface the Memory?
 
 ![1](figures/1.png)
 
@@ -58,7 +58,7 @@ ARM Cortex-M4 Processor have **32 bits Address bus**, that means that it can acc
 we have referred to **location** as **byte** so far, but you need to know that this is not always true, there'some memories have the location equals **16 bits** or more, but the absolute thing is that it still **byte addressable**, means that each byte have a unique address and each location contain number of bytes with number of addresses, and the processor access each location at once to increase performance of reading and writing to the Memory
 
 -----
-#### different types of memories
+### different types of memories
 ![2](figures/2.png)
 
 ROM memory is **Non volatile**, that means that it conserve the data stores in it even when the power is off.
