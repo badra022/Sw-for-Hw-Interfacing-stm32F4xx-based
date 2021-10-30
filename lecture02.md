@@ -1,0 +1,1 @@
+## lecture 2 notes
