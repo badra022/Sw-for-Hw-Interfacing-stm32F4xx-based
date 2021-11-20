@@ -84,7 +84,7 @@ so how the hardware (decoder) knows the addressing mode used in this instruction
 * in **armv6**, introduced SIMD instructions (single instruction multiple data) to improve speed, so ADD operation will be typically as ```ADD R1, R2,R3,R4,R5``` instead of two operands, this reduced the memory consumption and execution speed. support unaligned data in the mamory to reduce memory consumption as shown in this <a name="unalign">figure</a>. support multi-cores. introduces **Thumb-2** architecture, this is a combination of classical and Thumb archs with completely different OP codes to make the processor know well which instruction it will use, is it classical 32 bits or thumb 16 bits.
 * in **armv7**, Thumb-2 is the only supported arch. introduced New **Architecture profiles**, for each target of the processor (mobile, microcntroller, real-time) comes a customized internal peripherals.
 
-</div>
+<\div>
 
 <div style="order:1">
 
@@ -96,9 +96,9 @@ so how the hardware (decoder) knows the addressing mode used in this instruction
 
 [<img src="figures/unaligned.png">](#unalign)
 
-</div>
+<\div>
 
-</div>
+<\div>
 
 Arch profile | summary
 -------|------------
