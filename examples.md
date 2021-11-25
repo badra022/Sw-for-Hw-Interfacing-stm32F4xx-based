@@ -25,13 +25,13 @@ in 2 above examples both i2 or i1  value wont be changed
 
 - note (tentative defination allow more than 1 decleration of same variable with same decleration)
 ```c
-- extren int i;
-- static int i:
+- static int i;
+- extern int i:
 will compile noramlly 
 ```
 
 ```c
-- extern int i1;
-- static int i1 ;  
+- extern int i;
+- static int i ;  
 wont compile
 ```
