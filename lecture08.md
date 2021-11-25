@@ -1,6 +1,8 @@
 
 # Memory and storage classes
 
+## Memory sections
+
 ![sections](https://4.bp.blogspot.com/-6MDb37pMBVU/XIaI-7M2f8I/AAAAAAAADEk/g5s9pZvp7rYnTu_IZ6h9sZvs5EGw5M3EgCLcBGAs/s1600/mem.jpg)
 
 * **.text** section exist in Flash memory, this section is used to store the binary (machine code) to be fetched later for execution
@@ -71,6 +73,44 @@ int main(void){
 so far, startup code does
 * init .bss memory section to zeros
 * copy the shadow data section to .data section in ram
+
+these sections, each of them have a specific size in the memory, start address and end address. these parameters are configurable for each microcontroller by a file called **linked script (ld)**, as each mcu vendor manufacture a different physical memory with different sizes that imply to ARM memory architecture as we saw in lecture02.
+
+this linker script is an input to linker stage that help it assign physical addresses of the data into the physical memory sections
+
+this is a piece of linker script for tm4c123gh6pm microcontroller.
+
+```
+/******************************************************************************
+ *
+ * Default Linker script for the Texas Instruments TM4C123GH6PM
+ *
+ * This is derived from revision 11167 of the TivaWare Library.
+ *
+ *****************************************************************************/
+
+MEMORY
+{
+    FLASH (RX) : ORIGIN = 0x00000000, LENGTH = 0x00040000
+    SRAM (WX)  : ORIGIN = 0x20000000, LENGTH = 0x00008000
+}
+
+REGION_ALIAS("REGION_TEXT", FLASH);
+REGION_ALIAS("REGION_BSS", SRAM);
+REGION_ALIAS("REGION_DATA", SRAM);
+REGION_ALIAS("REGION_STACK", SRAM);
+REGION_ALIAS("REGION_HEAP", SRAM);
+REGION_ALIAS("REGION_ARM_EXIDX", FLASH);
+REGION_ALIAS("REGION_ARM_EXTAB", FLASH);
+```
+
+it defines the following
+* FLASH is starts from address 0x00000000 in address space, and it's size is 0x00040000
+* SRAM starts from addess 0x20000000 in addess space and it's size is 0x00008000
+* ```.text, .arm_extidx, .arm_extab``` are in flash and ```.bss, .data, .stack, .heap``` are in sram
+
+there're more details of these sections in the rest of linker script 
+
 
 
 
