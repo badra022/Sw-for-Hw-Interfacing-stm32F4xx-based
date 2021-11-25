@@ -1,12 +1,15 @@
 # ex1
-  - int main()
+  ```c
+  # include <stido.h>
+  int main()
     {
       float x=10.333;//ff<br />
       unsigned int y=x;<br />
       printf("%x ",y);10 in hexa which is a <br />
       printf("%x ",x);garbage as it try to print float with any other specifier than %f <br />
       return 0;<br /><br />
-    }  
+    } 
+   ```
 # ex2 
 - int i1 = 1;     // definition, external linkage
 - int i1;         // tentative definition, acts as declaration because i1 is defined
