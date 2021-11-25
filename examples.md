@@ -5,8 +5,8 @@
     {
       float x=10.333;
       unsigned int y=x;
-      printf("%x ",y);10 in hexa which is a
-      printf("%x ",x);garbage as it try to print float with any other specifier than %f 
+      printf("%x ",y);//10 in hexa which is a
+      printf("%x ",x);//garbage as it try to print float with any other specifier than %f 
       return 0;
     } 
 ```
@@ -24,14 +24,15 @@
 in 2 above examples both i2 or i1  value wont be changed 
 
 - note (tentative defination allow more than 1 decleration of same variable with same decleration)
+# ex3 
 ```c
 - static int i;
 - extern int i:
-will compile noramlly 
+//will compile noramlly 
 ```
 
 ```c
 - extern int i;
 - static int i ;  
-wont compile
+//wont compile
 ```
