@@ -1,5 +1,5 @@
 # ex1
-  ```c
+```c
   # include <stido.h>
   int main()
     {
@@ -9,9 +9,9 @@
       printf("%x ",x);garbage as it try to print float with any other specifier than %f 
       return 0;
     } 
-   ```
+```
 # ex2 
-  ```c
+```c
 - int i1 = 1;     // definition, external linkage
 - int i1;         // tentative definition, acts as declaration because i1 is defined
 - extern int i1;  // declaration, refers to the earlier definition
