@@ -24,15 +24,3 @@
 in 2 above examples both i2 or i1  value wont be changed 
 
 - note (tentative defination allow more than 1 decleration of same variable with same decleration)
-# ex3 
-```c
-- static int i;   // file 1
-- extern int i:   // file 2
-//will compile noramlly 
-```
-
-```c
-- extern int i;   //file 1
-- static int i ;  // file 2
-//wont compile
-```
