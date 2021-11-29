@@ -56,7 +56,7 @@ you can structure your code as objects which have attributes and methods. suppor
 
 * C is consisted of functions only. to execute specific function you need to call it
 
-* **compiler physically allocate memory for variables**
+* **compiler logically allocate memory for variables**
 
 * datatypes in C are **native** and **user defined** 
 
