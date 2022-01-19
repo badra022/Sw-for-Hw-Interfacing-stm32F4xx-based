@@ -92,6 +92,8 @@ no context switching | depend of compiler optmization | context switching
 
 so, why use pointers? **to access memory chunks using addresses**, done, that's it. let's expand this definition into three use cases
 
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/pointers-in-c.png" align="center">
+
 * pass/share variables by address.
     * so instead of passing the value of the variable to a local variable to some function, we will pass the address to make that function be able to access the original address value through it
 ```c
@@ -147,5 +149,226 @@ try to answer the next questions yourself without seeing the answer then check t
 what is the output of the following
 ---
 ```c
+#include <stdio.h>
 
+int main()
+{
+    int x = 5;
+    int* px = &x;
+    printf("%x", *px);
+
+    return 0;
+}
 ```
+```
+5
+```
+---
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x = 5;
+    int* px;
+    px = x;
+    printf("%x", *px);
+
+    return 0;
+}
+```
+the ```px = x``` assignment isn't correct, this assignment leads to a pointer pointing to location ```0x00000005``` in memory, thus the behavior of accessing this location using ```*px``` is undefined it may cause a runtime error or just print some garbage value
+
+the correct assignment is ```px = &x```
+
+---
+
+this question focus on the fact that ```int* px = &x;``` doesn't equal ```char* px = &x;``` doesn't equal ```unsigned char* px = &x;``` etc...
+
+the right way to think about that is as following, consider the example
+```c
+int main(void){
+    int x;
+    unsigned char* px = &x;
+}
+```
+here, the ```unsigned char*``` defines the datatype that the pointer ```px``` think he is pointing at, despite the fact that the data of x is integer value no matter how the pointer see it, but if we are dealing with ```x``` through it's pointer as ```*px```, it will be the datatype the pointer think the value is
+
+so a pointer ```unsigned char* px``` is a pointer to **unsigned characters** despite the real data it's pointing at 
+
+we can change the pointer type to **pointer to int** or **pointer to long** or whatever using **explicit casting** as we did with any other native datatypes, so if we accessed the px as ```*(int*)px```, it will be used as integer value, despite the definition of it as pointer to unsigned char.
+
+> fact: we can ever discard the ```px``` variable and use the address of x directly to access it as a pointer, like ```*(char*)0x00000800```, this method is used to define (#define) the mcu registers using their addresses to be able to be accessed without physically assign a pointer variable
+
+so the Question is:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x = 501;
+	char y = 201;		/* which will be converted to -55 and be stored in y */
+	char* py = &y;
+    int* px = &x;    
+    printf("%p\n", px);	/* print the address of x var */
+	printf("%d\n", *px);	/* print the 4 bytes pointed by the address assigned in px */	
+	printf("%d\n", *(char*)px);	/* print the 1 byte(signed) pointed by the address assigned in px */
+	printf("%d\n", *(unsigned char*)px);	/* print the 1 byte(unsigned) pointed by the address assigned in px */
+	printf("%d\n", *py);		/* print the 1 byte(signed) pointed by the address assigned to py */
+	printf("%d\n", *(int*)py);	/* print the 4 bytes pointed by the address assigned in py */
+	
+    return 0;
+}
+```
+```
+000000000061FE0C
+501
+-11
+245
+-55
+128457
+```
+
+---
+the following questions about pointer to pointer
+
+```c
+#include <stdio.h>
+
+int main()
+{
+	int x = 5;
+	int* px = &x;
+	int** ppx = &px;
+	printf("%d   %d     %d",x, *px, **ppx);
+    return 0;
+}
+```
+```
+5     5        5
+```
+Note: you can create **unlimited pointers to a one address**, and you can create **unlimited pointers to pointers to pointers to infinitly**...
+
+---
+
+```c
+#include <stdio.h>
+
+int main()
+{
+	int x = 5;
+	int* px = &x;
+	int* ppx = &px;
+	printf("%d   %d     %d",x, *px, **ppx);
+    return 0;
+}
+```
+```
+main.c:8:34: error: invalid type argument of unary '*' (have 'int')
+  printf("%d   %d     %d",x, *px, **ppx);
+                                  ^~~~~
+```
+
+a pointer to pointer must be defined with ```**``` not one
+
+---
+
+```c
+#include <stdio.h>
+
+int main()
+{
+	int x = 5;
+	int* px = &x;
+	int** ppx = &x;
+	printf("%d   %d     %d",x, *px, **ppx);
+    return 0;
+}
+```
+**undefined behavior** or **runtime error**
+
+choose either the answers in mcq
+
+---
+
+```c
+#include <stdio.h>
+
+int main()
+{
+	int x = 5;
+	int* px = &x;
+	int** ppx = &x;
+	printf("%d   %d     %d",x, *px, *ppx);
+    return 0;
+}
+```
+```
+5      5     5
+```
+
+---
+
+```c
+    #include <stdio.h>
+    void main()
+    {
+        int a[3] = {1, 2, 3};
+        int *p = a;
+        int *r = &p;
+        printf("%d", (**r));
+    }
+```
+* a) 1
+* b) Compile time error
+* c) Address of a
+* d) Junk value
+
+answer: b
+
+---
+```
+    #include <stdio.h>
+    void main()
+    {
+        int a[3] = {1, 2, 3};
+        int *p = a;
+        int **r = &p;
+        printf("%p %p", *r, a);
+    }
+```
+hint: the name of an array is the first address in the array as well, thus ```a = address of a[0]```
+
+* a) Different address is printed
+* b) 1 2
+* c) Same address is printed
+* d) 1 1
+
+answer: c
+
+explanation:
+<img src="figures/pp_arr.png" >
+
+---
+
+```c
+    #include <stdio.h>
+    int main()
+    {
+        int a = 1, b = 2, c = 3;
+        int *ptr1 = &a, *ptr2 = &b, *ptr3 = &c;
+        int **sptr = &ptr1; //-Ref
+        *sptr = ptr2;
+    }
+```
+* a) ptr1 points to a
+* b) ptr1 points to b
+* c) sptr points to ptr2
+* d) none of the mentioned
+
+answer: b
+
+explanation:
+<img src="figures/pp_swap.png">
+
