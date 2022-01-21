@@ -1,0 +1,4 @@
+precuartions:
+- minimize ISR code
+- minimize ISR number
+- disable interrupt nesting

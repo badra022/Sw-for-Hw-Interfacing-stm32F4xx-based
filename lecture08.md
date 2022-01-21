@@ -195,8 +195,8 @@ int func(void){
 section (segment) | features
 ---------| ------------------
 stack | non-permenant addresses<br>local variables storage<br> consumption not determined<br> still a random access memory <br> not initialized <br> runtime allocation <br> volatile values (ram)
-bss | initialized data storage (global vars)<br>permenant addresses <br> allocated by startup to the same values in ROM's shadow data section <br> volatile values (ram) <br>
-data | uninitialized data storage (global vars)<br>permenant addresses<br>initialized by startup to zeros<br>volatile values (ram)<br>
+bss | initialized data storage (global vars)<br>permenant addresses <br> initialized by startup to zeros <br> volatile values (ram) <br>
+data | uninitialized data storage (global vars)<br>permenant addresses<br>allocated by startup to the same values in ROM's shadow data section<br>volatile values (ram)<br>
 text or code | binary instructions storage <br>non-volatile(ROM)<br>permenant values and addresses
 rodata | read only data storage (```const``` and ```strings```)<br>non-volatile (ROM)<br>permenant addresses and values<br>
 

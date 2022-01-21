@@ -372,3 +372,38 @@ answer: b
 explanation:
 <img src="figures/pp_swap.png">
 
+---
+
+the following questions are about **pointer arithmetic**
+
+
+what is the output :
+```c
+#include "stdio.h"
+
+int main(void){
+    int x = 5, y = (4, 6);
+
+    int* px = &x;
+    int* py = &y;
+
+    printf("%d  %d", *px, *py);
+    printf("%d", px - py);
+
+    return 0;
+}
+```
+note that:
+```c
+/* comma as an operator */
+int i = (5, 10); /* 10 is assigned to i*/
+int j = (f1(), f2()); /* f1() is called (evaluated) first followed by f2().
+                      The returned value of f2() is assigned to j */
+```
+
+answer:
+```
+5  6
+1
+```
+
