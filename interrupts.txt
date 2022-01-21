@@ -1,4 +1,4 @@
-precuartions:
+precuations to take when dealing with interrupts:
 - minimize ISR code
 - minimize ISR number
 - disable interrupt nesting
