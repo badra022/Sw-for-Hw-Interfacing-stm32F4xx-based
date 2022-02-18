@@ -2,3 +2,10 @@ precuartions:
 - minimize ISR code
 - minimize ISR number
 - disable interrupt nesting
+
+
+لو معاك gpio ، و معندكش اى serial communication peripheral ، هتقدر ت simulate انهى من البروتوكولات دى بال gpio:
+UART
+SPI
+I2C
+DMA
